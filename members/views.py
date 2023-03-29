@@ -13,18 +13,18 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('index')
         else:
             messages.success(request, ("There was an error logging in"))
             return redirect('login')
     else:
-        return render(request, 'authenticate/login.html', {})
+        return render(request, 'app/login.html', {})
 
 def logout_user(request):
     logout(request)
     messages.success(request, ("You were successfully logged out"))
 
-    return redirect('home')
+    return redirect('index')
 
 def register_user(request):
     if request.method == "POST":
@@ -36,9 +36,9 @@ def register_user(request):
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, ("Registration successful"))
-            return redirect('home')
+            return redirect('index')
     else:
         form = RegisterUserForm()
-    return render(request, 'authenticate/register_user.html', {
+    return render(request, 'app/register_user.html', {
         'form':form,
     })
