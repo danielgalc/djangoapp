@@ -18,7 +18,7 @@
             }
         </style>
 
-        <form action="{% url 'register-user' %}" method="POST">
+        <form action="{% url 'members:register-user' %}" method="POST">
             {% csrf_token %}
 
             {{ form.as_p }}

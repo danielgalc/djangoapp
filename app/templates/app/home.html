@@ -1,15 +1,16 @@
 {% extends 'app/base.html' %}
 
+
 {% block content %}
 
+
     <center>
-        <h1> Hello {{ name }}! Events for {{ month }} {{ year}} </h1>
-        
-        As of {{ time }}
-        <br><br> 
-        {{ cal|safe }}
+        <h1> ¡Bienvenido! </h1>
+        <h2>Seleccione una de las opciones para comenzar. </h2>
         <br><br><br><br>
-        Copyright (c) {{ current_year }}
+        <a href="{% url 'members:login' %}"><button>Iniciar Sesión</button></a>
+        <a href="{% url 'members:register-user' %}"><button>Crear una cuenta</button></a>
+        
     </center>
 
 {% endblock %}

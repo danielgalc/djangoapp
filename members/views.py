@@ -18,7 +18,7 @@ def login_user(request):
             messages.success(request, ("There was an error logging in"))
             return redirect('login')
     else:
-        return render(request, 'app/login.html', {})
+        return render(request, 'authenticate/login.html', {})
 
 def logout_user(request):
     logout(request)
@@ -39,6 +39,6 @@ def register_user(request):
             return redirect('index')
     else:
         form = RegisterUserForm()
-    return render(request, 'app/register_user.html', {
+    return render(request, 'authenticate/register_user.html', {
         'form':form,
     })

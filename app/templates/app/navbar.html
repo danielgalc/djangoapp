@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'home' %}">Ejemplo App</a>
+      <a class="navbar-brand" href="{% url 'app:home' %}">Ejemplo App</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -12,11 +12,11 @@
               Events
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="{% url 'add-event' %}">Add Event</a></li>
-              <li><a class="dropdown-item" href="{% url 'list-events' %}">Events</a></li>
+              <li><a class="dropdown-item" href="{% url 'app:add-event' %}">Add Event</a></li>
+              <li><a class="dropdown-item" href="{% url 'app:list-events' %}">Events</a></li>
             </ul>
           {% else %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'list-events' %}">All Events</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'app:list-events' %}">All Events</a></li>
           {% endif %}
           </li>
           {% if user.is_authenticated  %}
@@ -25,11 +25,11 @@
               Venues
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="{% url 'add-venue' %}">Add Venue</a></li>
-              <li><a class="dropdown-item" href="{% url 'list-venues' %}">Venues</a></li>
+              <li><a class="dropdown-item" href="{% url 'app:add-venue' %}">Add Venue</a></li>
+              <li><a class="dropdown-item" href="{% url 'app:list-venues' %}">Venues</a></li>
             </ul>
           {% else %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'list-venues' %}">All Venues</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'app:list-venues' %}">All Venues</a></li>
           {% endif %}
           </li>
           <li class="nav-item dropdown">
@@ -37,26 +37,26 @@
               Files
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="{% url 'venue-text' %}">Venue Text File</a></li>
-              <li><a class="dropdown-item" href="{% url 'venue-csv' %}">Venue CSV File</a></li>
-              <li><a class="dropdown-item" href="{% url 'venue-pdf' %}">Venue PDF File</a></li>
+              <li><a class="dropdown-item" href="{% url 'app:venue-text' %}">Venue Text File</a></li>
+              <li><a class="dropdown-item" href="{% url 'app:venue-csv' %}">Venue CSV File</a></li>
+              <li><a class="dropdown-item" href="{% url 'app:venue-pdf' %}">Venue PDF File</a></li>
             </ul>
           </li>
           {% if user.is_authenticated  %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            <a class="nav-link" href="{% url 'members:logout' %}">Logout</a>
           </li>
           {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}">Login</a>
+              <a class="nav-link" href="{% url 'members:login' %}">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'register-user' %}">Register</a>
+              <a class="nav-link" href="{% url 'members:register-user' %}">Register</a>
             </li>
           {% endif %}
 
         </ul>
-        <form class="d-flex" method="POST" action="{% url 'search-venues' %}">
+        <form class="d-flex" method="POST" action="{% url 'app:search-venues' %}">
           {% csrf_token %}
 
           <input class="form-control me-2" type="search" placeholder="Search Venues" aria-label="Search" name="searched">
