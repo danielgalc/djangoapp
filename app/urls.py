@@ -4,7 +4,6 @@ from . import views
 app_name = 'app';
 urlpatterns = [
     path('', views.home, name="home"),
-    path('<int:year>/<str:month>/', views.home, name="home"),
     path('events', views.all_events, name="list-events"),
     path('add_venue', views.add_venue, name='add-venue'),
     path('list_venues', views.list_venues, name='list-venues'),
@@ -18,4 +17,5 @@ urlpatterns = [
     path('venue_text', views.venue_text, name='venue-text'),
     path('venue_csv', views.venue_csv, name='venue-csv'),
     path('venue_pdf', views.venue_pdf, name='venue-pdf'),
+    path('authenticate/index', views.index, name='index')
 ]

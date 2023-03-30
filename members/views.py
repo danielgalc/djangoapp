@@ -1,7 +1,9 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from .forms import RegisterUserForm
 
 # Create your views here.
@@ -24,7 +26,7 @@ def logout_user(request):
     logout(request)
     messages.success(request, ("You were successfully logged out"))
 
-    return redirect('index')
+    return redirect('home')
 
 def register_user(request):
     if request.method == "POST":
@@ -33,12 +35,19 @@ def register_user(request):
             form.save()
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
+
+            #r_pass = User.objects.make_random_password()
+            #password = r_pass
+
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, ("Registration successful"))
-            return redirect('index')
+            return redirect('authenticate/index')
     else:
         form = RegisterUserForm()
     return render(request, 'authenticate/register_user.html', {
         'form':form,
     })
+
+def index(request):
+    return render(request, 'authenticate/index.html', {})

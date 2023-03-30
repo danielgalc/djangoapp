@@ -6,7 +6,7 @@
         <br><br>
 
         {% if submitted %}
-            Your Event Was Submitted Succesfully
+            Tu incidencia ha sido enviada con éxito.
         {% else %}
             <form action="" method="POST">
                 {% csrf_token %}
@@ -17,7 +17,7 @@
             </form>
         {% endif %}
     {% else %}
-        <h1> Sorry! You must be logged in to view this page. </h1>
-        <a href="{% url 'login' %}">Login Here</a>
+        <h1> ¡Vaya! Parece que no has iniciado sesión. </h1>
+        <a href="{% url 'members:login' %}">Inicia sesión aquí</a>
     {% endif %}
 {% endblock %}
