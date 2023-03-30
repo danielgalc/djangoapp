@@ -33,3 +33,18 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+# MODELO RENTEL INCIDENCIAS
+
+#class Incidencia(models.Model):
+#    titulo_incidencia = models.CharField(max_length=255, null=True)
+#    desc_incidencia = models.TextField()
+#    fecha = models.DateTimeField(auto_now_add=True)
+#    asignada = models.BooleanField(default=False)
+#    direccion = models.CharField(max_length=255, null=True)
+#    cliente_id = models.ForeignKey(
+#        Cliente,
+#        related_name="incidencias",
+#        on_delete=models.CASCADE
+#    )

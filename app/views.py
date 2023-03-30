@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Event, Venue
-from .forms import VenueForm, EventForm, EventFormAdmin
+from .forms import VenueForm, EventForm, EventFormAdmin, ContactForm
 import csv
 from django.http import FileResponse
 import io
 from django.contrib import messages
+from django.core.mail import send_mail, BadHeaderError
 
 
 # Import Pagination Stuff
@@ -283,3 +284,40 @@ def home(request):
 
 def index(request):
     return render(request, 'authenticate/index.html', {})
+
+def contacto(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = "Ejemplo Prueba"
+            body = {
+                'username': form.cleaned_data['username'],
+                'email': form.cleaned_data['email'],
+                'message': form.cleaned_data['message']
+            }
+            message = "\n".join(body.values())
+
+            try:
+                send_mail(subject, message, 'admin@admin.com', ['admin@admin.com'])
+            except BadHeaderError:
+                return HttpResponse('Cabecera errónea.')
+            messages.success(request, '¡Tu correo se ha enviado con éxito!')
+            return redirect("members:index")
+    form = ContactForm()
+    context = {'form':form}
+    template = loader.get_template('app/contacto.html')
+    return HttpResponse(template.render(context, request))
+
+
+
+
+
+
+
+
+
+
+
+
+
+

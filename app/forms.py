@@ -75,3 +75,10 @@ class EventForm(ModelForm):
             'attendees': forms.SelectMultiple(attrs={'class':'form-control', 'placeholder': 'Attendees'}),
             'description': forms.Textarea(attrs={'class':'form-control', 'placeholder': 'Description'}),
         }
+
+# Formulario para página de contacto
+
+class ContactForm(forms.Form):
+    username = forms.CharField()
+    email = forms.EmailField()
+    message = forms.CharField(widget=forms.Textarea, max_length=450)
