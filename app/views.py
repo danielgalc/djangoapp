@@ -1,19 +1,12 @@
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
-import calendar
-from calendar import HTMLCalendar
-from datetime import datetime
 from .models import Event, Venue
 from .forms import VenueForm, EventForm, EventFormAdmin
 import csv
 from django.http import FileResponse
 import io
-from reportlab.pdfgen import canvas
-from reportlab.lib.units import inch
-from reportlab.lib.pagesizes import letter
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 
 
 # Import Pagination Stuff
