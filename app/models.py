@@ -38,12 +38,15 @@ class Event(models.Model):
 # MODELO RENTEL INCIDENCIAS
 
 class Cliente(models.Model):
+    username = models.CharField(max_length=20, null=True)
     nombre = models.CharField(max_length=20)
     apellido = models.CharField(max_length=20)
     clave = models.CharField(max_length=7)
     dni = models.CharField(max_length=9)
     tlf = models.TextField()
     direccion = models.TextField()
+    email = models.EmailField(null=True)
+    
 
 class Incidencia(models.Model):
     titulo_incidencia = models.CharField(max_length=255, null=True)

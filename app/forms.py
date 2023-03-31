@@ -94,7 +94,7 @@ class IncidenciaForm(ModelForm):
         labels = {
             'titulo_incidencia': 'Asunto',
             'desc_incidencia': 'Descripción',
-            'direccion': '',
+            'direccion': 'Direccion',
         }
 
         widgets = {

@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
+
+from app.admin import IncidenciaAdmin
 from .models import Event, Venue
 from .forms import IncidenciaForm, VenueForm, EventForm, EventFormAdmin, ContactForm
 import csv
@@ -309,26 +311,37 @@ def contacto(request):
     return HttpResponse(template.render(context, request))
 
 def add_incidencia(request):
-    #if request.method == 'POST':
-    #    form = IncidenciaForm(request.POST)
-    #    if form.is_valid():
-    #        subject = "Ejemplo Prueba"
-    #        body = {
-    #            'username': form.cleaned_data['username'],
-    #            'email': form.cleaned_data['email'],
-    #            'message': form.cleaned_data['message']
-    #        }
-    #        message = "\n".join(body.values())
-    #
-    #        try:
-    #            send_mail(subject, message, 'admin@admin.com', ['admin@admin.com'])
-    #        except BadHeaderError:
-    #            return HttpResponse('Cabecera errónea.')
-    #        messages.success(request, '¡Tu correo se ha enviado con éxito!')
-    #        return redirect("members:index")
-    #form = ContactForm()
-    context = {}
+    #return render(request, 'app/add_venue.html', {'form':form})
+    submitted = False
+    if request.method == "POST":
+        if request.user.is_superuser:        
+            form = IncidenciaAdmin(request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/add_incidencia?submitted=True')
+        else:
+            form = IncidenciaForm(request.POST)
+            if form.is_valid():
+                #form.save()
+                event = form.save(commit=False)
+                event.cliente = request.user #Logged in user
+                event.save()
+                return HttpResponseRedirect('/add_incidencia?submitted=True')
+    else:
+        # Just going to the page, not submitting
+        if request.user.is_superuser:
+            form = IncidenciaAdmin
+        else:
+            form = IncidenciaForm
+        if 'submitted' in request.GET:
+            submitted = True
+    
     template = loader.get_template('app/add_incidencia.html')
+    context = {
+        'form': form,
+        'submitted': submitted,
+    }
+
     return HttpResponse(template.render(context, request))
 
 

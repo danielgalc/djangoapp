@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Venue
+from .models import Cliente, Incidencia, Venue
 from .models import MyClubUser
 from .models import Event
 
@@ -8,7 +8,6 @@ admin.site.register(MyClubUser)
 #admin.site.register(Event)
 
 @admin.register(Venue)
-
 class VenueAdmin(admin.ModelAdmin):
     list_display = ('name','address', 'phone')
     ordering = ('name',)
@@ -20,5 +19,22 @@ class EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'event_date', 'venue')
     list_filter = ('event_date', 'venue')
     ordering = ('-event_date',)
+
+@admin.register(Incidencia)
+class IncidenciaAdmin(admin.ModelAdmin):
+    fields = ('titulo_incidencia', 'desc_incidencia', 'fecha', 'asignada', 'direccion', 'cliente_id')
+    list_display = ('titulo_incidencia', 'fecha', 'direccion')
+    list_filter = ('fecha', 'direccion')
+    ordering = ('-fecha',)
+
+@admin.register(Cliente)
+class ClienteAdmin(admin.ModelAdmin):
+    fields = ('username', 'nombre', 'apellido', 'clave', 'dni', 'tlf', 'direccion', 'email')
+    list_display = ('username', 'email', 'direccion')
+    list_filter = ('email', 'direccion')
+    ordering = ('username',)
+
+
+
 
 
