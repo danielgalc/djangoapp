@@ -37,14 +37,23 @@ class Event(models.Model):
 
 # MODELO RENTEL INCIDENCIAS
 
-#class Incidencia(models.Model):
-#    titulo_incidencia = models.CharField(max_length=255, null=True)
-#    desc_incidencia = models.TextField()
-#    fecha = models.DateTimeField(auto_now_add=True)
-#    asignada = models.BooleanField(default=False)
-#    direccion = models.CharField(max_length=255, null=True)
-#    cliente_id = models.ForeignKey(
-#        Cliente,
-#        related_name="incidencias",
-#        on_delete=models.CASCADE
-#    )
+class Cliente(models.Model):
+    nombre = models.CharField(max_length=20)
+    apellido = models.CharField(max_length=20)
+    clave = models.CharField(max_length=7)
+    dni = models.CharField(max_length=9)
+    tlf = models.TextField()
+    direccion = models.TextField()
+
+class Incidencia(models.Model):
+    titulo_incidencia = models.CharField(max_length=255, null=True)
+    desc_incidencia = models.TextField()
+    fecha = models.DateTimeField(auto_now_add=True)
+    asignada = models.BooleanField(default=False)
+    direccion = models.CharField(max_length=255, null=True)
+    cliente_id = models.ForeignKey(
+        Cliente,
+        related_name="incidencias",
+        on_delete=models.CASCADE
+    )
+

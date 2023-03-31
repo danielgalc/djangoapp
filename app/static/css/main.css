@@ -1,7 +1,6 @@
+/* BOTONES INDEX - INCIDENCIA, CONTACTO*/
 
-/* BOTON INDEX - INCIDENCIA*/
-
-.button-contacto{
+.button-incidencia {
     background: #FF4742;
     border: 1px solid #FF4742;
     border-radius: 6px;
@@ -10,7 +9,7 @@
     color: #FFFFFF;
     cursor: pointer;
     display: inline-block;
-    font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+    font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
     font-size: 16px;
     font-weight: 800;
     line-height: 16px;
@@ -24,15 +23,108 @@
     -webkit-user-select: none;
     touch-action: manipulation;
     vertical-align: middle;
-    }
+}
 
-    .button-conctacto:hover,
-    .button-conctacto:active {
+.button-incidencia:hover,
+.button-incidencia:active {
     background-color: initial;
     background-position: 0 0;
     color: #FF4742;
-    }
+}
 
-    .button-conctacto:active {
+.button-incidencia:active {
     opacity: .5;
-    }
+}
+
+.button-contacto {
+    background: #9e45de;
+    border: 1px solid #9e45de;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+}
+
+.button-contacto:hover,
+.button-contacto:active {
+    background-color: initial;
+    background-position: 0 0;
+    color: #9e45de;
+}
+
+.button-contacto:active {
+    opacity: .5;
+}
+
+.boton-enviar{
+    background: #0388fc;
+    border: 1px solid #0388fc;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+}
+
+.boton-enviar:hover,
+.boton-enviar:active {
+    background-color: initial;
+    background-position: 0 0;
+    color: #0388fc;
+}
+
+.boton-enviar:active {
+    opacity: .5;
+}
+
+/* FORM CONTACTO */
+
+div.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input,
+label {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+}
+
+label {
+    font-weight: bold;
+}

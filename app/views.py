@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Event, Venue
-from .forms import VenueForm, EventForm, EventFormAdmin, ContactForm
+from .forms import IncidenciaForm, VenueForm, EventForm, EventFormAdmin, ContactForm
 import csv
 from django.http import FileResponse
 import io
@@ -307,6 +307,30 @@ def contacto(request):
     context = {'form':form}
     template = loader.get_template('app/contacto.html')
     return HttpResponse(template.render(context, request))
+
+def add_incidencia(request):
+    #if request.method == 'POST':
+    #    form = IncidenciaForm(request.POST)
+    #    if form.is_valid():
+    #        subject = "Ejemplo Prueba"
+    #        body = {
+    #            'username': form.cleaned_data['username'],
+    #            'email': form.cleaned_data['email'],
+    #            'message': form.cleaned_data['message']
+    #        }
+    #        message = "\n".join(body.values())
+    #
+    #        try:
+    #            send_mail(subject, message, 'admin@admin.com', ['admin@admin.com'])
+    #        except BadHeaderError:
+    #            return HttpResponse('Cabecera errónea.')
+    #        messages.success(request, '¡Tu correo se ha enviado con éxito!')
+    #        return redirect("members:index")
+    #form = ContactForm()
+    context = {}
+    template = loader.get_template('app/add_incidencia.html')
+    return HttpResponse(template.render(context, request))
+
 
 
 
