@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from app.models import Cliente
+from .forms import RegisterUserForm
 
 # Create your views here.
 
@@ -15,14 +15,14 @@ def login_user(request):
         })
     else:
         email = request.POST['email']
-        email = Cliente.objects.get(email=email).email
-        clave = request.POST['clave']
+        username = User.objects.get(email=email).username
+        password = request.POST['password']
         user = authenticate(request,
-                            email=email,
-                            clave=clave)
+                            username=username,
+                            password=password)
         print(user)
         if user is None:
-            messages.error(request, ('Email o clave incorrecta.'))
+            messages.error(request, ('Email or password is incorrect'))
             messages.error(request, ((type(user))))
             return render(request, 'authenticate/login.html', {
                 'form': AuthenticationForm,
@@ -39,17 +39,34 @@ def logout_user(request):
 
 def register_user(request):
     if request.method == "POST":
-        username = request.POST['username']
-        email = request.POST['email']
-        tlf = request.POST['tlf']
+        form = RegisterUserForm(request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password1']
+            email = request.POST['email']
 
-        cliente = Cliente.objects.create(username=username, email=email, tlf=tlf)
-        cliente.save()
+            if User.objects.filter(username=username).exists():
+                messages.error(request, ("Username already exists"))
+                return redirect('authenticate/register_user')
 
-        return redirect('members:login')
+            try:
+                user = User.objects.create_user(username=username, password=password, email=email)
+                user.save()
+            except IntegrityError:
+                messages.error(request, ("Username already exists"))
+                return redirect('register_user')
 
+            user = authenticate(username=username, password=password, email=email)
+            print(user)
+            login(request, user)
+            messages.success(request, ("Registration successful"))
+            messages.success(request, (type(user)))
+            return redirect('app/index')
     else:
-        return render(request, 'authenticate/register_user.html', {})
+        form = RegisterUserForm()
+    return render(request, 'authenticate/register_user.html', {
+        'form':form,
+    })
 
 def index(request):
     return render(request, 'app/index.html', {})
