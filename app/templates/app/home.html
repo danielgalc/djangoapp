@@ -3,7 +3,7 @@
 
 {% block content %}
 
-{% if user.is_authenticated  %}
+{% if cliente.is_authenticated  %}
     <meta http-equiv="refresh" content="0; {% url 'members:index' %}" />
 {% else %}
     <center>

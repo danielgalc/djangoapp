@@ -29,10 +29,10 @@ class IncidenciaAdmin(admin.ModelAdmin):
 
 @admin.register(Cliente)
 class ClienteAdmin(admin.ModelAdmin):
-    fields = ('username', 'nombre', 'apellido', 'clave', 'dni', 'tlf', 'direccion', 'email')
-    list_display = ('username', 'email', 'direccion')
+    fields = ('email', 'nombre', 'apellido', 'dni', 'tlf', 'direccion')
+    list_display = ('email', 'direccion')
     list_filter = ('email', 'direccion')
-    ordering = ('username',)
+    ordering = ('email',)
 
 
 

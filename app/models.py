@@ -1,5 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.db.models.signals import post_save
+from django.conf import settings
 
 
 class Venue(models.Model):
@@ -27,26 +29,105 @@ class Event(models.Model):
     event_date = models.DateTimeField('Event Date')
     #venue = models.CharField(max_length=120)
     venue = models.ForeignKey(Venue, blank=True, null=True, on_delete=models.CASCADE)
-    manager = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
+    manager = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.SET_NULL)
     description = models.TextField(blank=True)
     attendees = models.ManyToManyField(MyClubUser, blank = True)
 
     def __str__(self):
         return self.name
     
-
 # MODELO RENTEL INCIDENCIAS
 
-class Cliente(models.Model):
-    username = models.CharField(max_length=20, null=True)
+
+
+
+# MODELO ADMIN
+
+class ClienteManager(BaseUserManager):
+    def create_user(self, email, password=None, is_staff=False, is_superuser=False,):
+        """
+        Creates and saves a User with the given email, date of
+        birth and password.
+        """
+        if not email:
+            raise ValueError('Users must have an email address')
+
+        user = self.model(
+            email=self.normalize_email(email),
+            is_staff=is_staff,
+            is_superuser=is_superuser,
+        )
+
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, password, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self.create_user(email, password, **extra_fields)
+
+
+
+class Cliente(AbstractBaseUser, PermissionsMixin):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, default=None)
+    #username = models.CharField(max_length=20, default=None)
+    email = models.EmailField(
+                    verbose_name='email address',
+                    max_length=255,
+                    unique=True,
+                )
+    password = models.CharField(max_length=20, default=None)
     nombre = models.CharField(max_length=20)
     apellido = models.CharField(max_length=20)
-    clave = models.CharField(max_length=7)
     dni = models.CharField(max_length=9)
-    tlf = models.TextField()
-    direccion = models.TextField()
-    email = models.EmailField(null=True)
+
+    ROL_CHOICES = (("CLIENTE", "Cliente"),
+                   ("SOPORTE", "Soporte"),
+                   ("TECNICO", "Tecnico"),
+                   ("ADMIN", "Admin"),)
     
+    rol = models.CharField(max_length=7, choices=ROL_CHOICES,default="CLIENTE")
+    tlf = models.CharField(max_length=9)
+    direccion = models.CharField(max_length=50)
+
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+
+    USERNAME_FIELD = 'email'
+    #REQUIRED_FIELDS = ['username']
+
+    objects = ClienteManager()
+
+    def __str__(self):
+        return "%s's profile" % self.user
+    
+def crear_cliente(sender, instance, created, **kwargs):
+    if created:
+        profile, created = Cliente.objects.get_or_create(user=instance)
+
+post_save.connect(crear_cliente, sender=User)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class Incidencia(models.Model):
     titulo_incidencia = models.CharField(max_length=255, null=True)
