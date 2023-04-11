@@ -7,6 +7,13 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import RegisterUserForm
 
+# PARA REGISTRAR LOS CLIENTES TENEMOS QUE:
+#   1. FROM DJANGO.CONTRIB.AUTH IMPORT GET_USER_MODEL
+#   2. USER = GET_USER_MODEL()
+#   3. USUARIO = USER.OBJECTS.CREATE_USER(...)
+#   4. CLIENTE = CLIENTE.OBJECTS.CREATE(...) 
+
+
 # Create your views here.
 
 def login_user(request):
