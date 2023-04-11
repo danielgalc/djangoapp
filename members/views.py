@@ -44,12 +44,12 @@ def register_user(request):
             email = request.POST['email']
             password = request.POST['password1']
 
-            if Cliente.objects.filter(email=email).exists():
+            if User.objects.filter(email=email).exists():
                 messages.error(request, ("Email already exists"))
                 return redirect('authenticate/register_user')
 
             try:
-                user = Cliente.objects.create(email=email, password=password)
+                user = User.objects.create(email=email, password=password)
                 user.save()
             except IntegrityError:
                 messages.error(request, ("Username already exists"))
@@ -66,6 +66,7 @@ def register_user(request):
     return render(request, 'authenticate/register_user.html', {
         'form':form,
     })
+
 
 def index(request):
     return render(request, 'app/index.html', {})
