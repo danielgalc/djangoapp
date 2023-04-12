@@ -1,0 +1,25 @@
+12/04 
+
+Los superusuarios se crean correctamente y aparecen en la base de datos
+con el rol adecuado de forma predeterminado.
+
+Los usuarios se crean correctamente a partir del modelo personalizado,
+que se ha renombrado a Usuario para evitar confusiones.
+
+El login funciona correctamente en consecuencia del registro.
+
+**Hay que hacer comprobaciones en el login segun el rol del usuario que 
+inicia sesión, para así redireccionarle a una sección u otra.
+
+
+__
+
+El formulario de las incidencias funciona bien, recoge los datos y los envía
+creando bien el objeto en la base de datos.
+
+He creado las urls para que todo se redirija correctamente.
+
+He creado comentarios en los modelos.
+
+** Es necesario hacer una plantilla y vista para mostrar las incidencias (tickets)
+del usuario que está logueado.

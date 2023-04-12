@@ -39,11 +39,7 @@ class Event(models.Model):
     
 # MODELO RENTEL INCIDENCIAS
 
-
-
-
-# MODELO ADMIN
-
+# MODELO PERSONALIZADO USUARIO Y SUPERUSUARIO(ADMIN)
 
 class UsuarioManager(BaseUserManager):
     def create_user(self, email, nombre, apellido, dni, tlf, direccion, rol="CLIENTE", password=None, is_staff=False, is_superuser=False,):
@@ -111,21 +107,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
     objects = UsuarioManager()
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# MODELO INCIDENCIA. [Zona Cliente]
 
 class Incidencia(models.Model):
     titulo_incidencia = models.CharField(max_length=255, null=True)
