@@ -47,7 +47,7 @@ class Event(models.Model):
 
 
 class ClienteManager(BaseUserManager):
-    def create_user(self, email, password=None, is_staff=False, is_superuser=False,):
+    def create_user(self, email, password=None, rol=None, is_staff=False, is_superuser=False,):
         """
         Creates and saves a User with the given email, date of
         birth and password.
@@ -63,11 +63,16 @@ class ClienteManager(BaseUserManager):
 
         user.set_password(password)
         user.save(using=self._db)
+
+        user.rol = rol
+        user.save(using=self._db)
+
         return user
 
     def create_superuser(self, email, password, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('rol', "ADMIN")
 
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
@@ -96,7 +101,7 @@ class Cliente(AbstractBaseUser, PermissionsMixin):
                    ("TECNICO", "Tecnico"),
                    ("ADMIN", "Admin"),)
     
-    rol = models.CharField(max_length=7, choices=ROL_CHOICES,default="CLIENTE")
+    rol = models.CharField(max_length=7, choices=ROL_CHOICES)
     tlf = models.CharField(max_length=9)
     direccion = models.CharField(max_length=50)
 
@@ -104,12 +109,9 @@ class Cliente(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
-    #REQUIRED_FIELDS = ['username']
+    #REQUIRED_FIELDS = ['rol']
 
     objects = ClienteManager()
-
-    def __str__(self):
-        return "%s's profile" % self.user
     
     def crear_cliente(sender, instance, created, **kwargs):
         if created:
