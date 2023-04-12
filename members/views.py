@@ -4,7 +4,7 @@ from app.models import *
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import ClienteCreationForm
+from .forms import UsuarioCreationForm
 
 # Create your views here.
 
@@ -39,7 +39,7 @@ def logout_user(request):
 def register_user(request):
 
     if request.method == "POST":
-        form = ClienteCreationForm(request.POST)
+        form = UsuarioCreationForm(request.POST)
         if form.is_valid():
             email = request.POST['email']
             password = request.POST['password1']
@@ -72,7 +72,7 @@ def register_user(request):
             messages.success(request, (type(usuario)))
             return redirect('app/index')
     else:
-        form = ClienteCreationForm()
+        form = UsuarioCreationForm()
     return render(request, 'authenticate/register_user.html', {
         'form':form,
     })

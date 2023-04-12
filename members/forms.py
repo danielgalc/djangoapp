@@ -29,7 +29,7 @@ from app.models import Usuario
 class EmailAuthenticationForm(AuthenticationForm):
     username = forms.EmailField(label='Email')
 
-class ClienteCreationForm(UserCreationForm):
+class UsuarioCreationForm(UserCreationForm):
     password1 = forms.CharField(
         label="Password",
         strip=False,
