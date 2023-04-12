@@ -6,7 +6,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          {% if cliente.is_authenticated  %}
+          {% if user.is_authenticated  %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Events
@@ -19,7 +19,7 @@
             <li class="nav-item"><a class="nav-link" href="{% url 'app:list-events' %}">All Events</a></li>
           {% endif %}
           </li>
-          {% if cliente.is_authenticated  %}
+          {% if user.is_authenticated  %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Venues
@@ -42,7 +42,7 @@
               <li><a class="dropdown-item" href="{% url 'app:venue-pdf' %}">Venue PDF File</a></li>
             </ul>
           </li>
-          {% if cliente.is_authenticated  %}
+          {% if user.is_authenticated  %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'members:logout' %}">Logout</a>
           </li>

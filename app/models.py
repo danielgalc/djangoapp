@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db.models.signals import post_save
 from django.conf import settings
-from django.contrib.auth import get_user_model
 
 
 
@@ -47,24 +46,23 @@ class Event(models.Model):
 
 
 class ClienteManager(BaseUserManager):
-    def create_user(self, email, password=None, rol=None, is_staff=False, is_superuser=False,):
-        """
-        Creates and saves a User with the given email, date of
-        birth and password.
-        """
+    def create_user(self, email, nombre, apellido, dni, tlf, direccion, rol="CLIENTE", password=None, is_staff=False, is_superuser=False,):
         if not email:
             raise ValueError('Users must have an email address')
 
         user = self.model(
             email=self.normalize_email(email),
+            nombre=nombre,
+            apellido=apellido,
+            rol=rol,
+            dni=dni,
+            tlf=tlf,
+            direccion=direccion,
             is_staff=is_staff,
             is_superuser=is_superuser,
         )
 
         user.set_password(password)
-        user.save(using=self._db)
-
-        user.rol = rol
         user.save(using=self._db)
 
         return user
@@ -113,11 +111,19 @@ class Cliente(AbstractBaseUser, PermissionsMixin):
 
     objects = ClienteManager()
     
-    def crear_cliente(sender, instance, created, **kwargs):
-        if created:
-            profile, created = Cliente.objects.get_or_create(user=instance)
-
-    post_save.connect(crear_cliente, sender=User)
+#def crear_cliente(sender, instance, created, **kwargs):
+#    if created:
+#        cliente = Cliente.objects.create_user(email=instance.email, password=instance.password)
+#        cliente.nombre = instance.nombre
+#        cliente.apellido = instance.apellido
+#        cliente.dni = instance.dni
+#        cliente.tlf = instance.tlf
+#        cliente.direccion = instance.direccion
+#        cliente.save()
+#        instance.user = cliente
+#        instance.save()
+#
+#post_save.connect(crear_cliente, sender=Cliente)
 
 
 

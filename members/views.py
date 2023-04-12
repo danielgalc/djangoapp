@@ -1,11 +1,10 @@
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import User
 from app.models import Cliente
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import RegisterUserForm
+from .forms import ClienteCreationForm
 
 # PARA REGISTRAR LOS CLIENTES TENEMOS QUE:
 #   1. FROM DJANGO.CONTRIB.AUTH IMPORT GET_USER_MODEL
@@ -45,31 +44,42 @@ def logout_user(request):
     return redirect('app/home')
 
 def register_user(request):
+
     if request.method == "POST":
-        form = RegisterUserForm(request.POST)
+        form = ClienteCreationForm(request.POST)
         if form.is_valid():
             email = request.POST['email']
             password = request.POST['password1']
-
-            if User.objects.filter(email=email).exists():
-                messages.error(request, ("Email already exists"))
-                return redirect('authenticate/register_user')
+            nombre = request.POST['nombre']
+            apellido = request.POST['apellido']
+            dni = request.POST['dni']
+            tlf = request.POST['tlf']
+            direccion = request.POST['direccion']
 
             try:
-                user = User.objects.create(email=email, password=password)
-                user.save()
-            except IntegrityError:
-                messages.error(request, ("Username already exists"))
-                return redirect('register_user')
+                usuario = Cliente.objects.create_user(email=email, 
+                                                      password=password,
+                                                      nombre=nombre,
+                                                      apellido=apellido,
+                                                      dni=dni,
+                                                      tlf=tlf,
+                                                      direccion=direccion)
 
-            user = authenticate(email=email, password=password)
-            print(user)
-            login(request, user)
+                
+                usuario.save()
+            except IntegrityError as e:
+                #Cambiar el error
+                messages.error(request, (e))
+                return redirect('members:register-user')
+
+            usuario = authenticate(email=email, password=password)
+            print(usuario)
+            login(request, usuario)
             messages.success(request, ("Registration successful"))
-            messages.success(request, (type(user)))
+            messages.success(request, (type(usuario)))
             return redirect('app/index')
     else:
-        form = RegisterUserForm()
+        form = ClienteCreationForm()
     return render(request, 'authenticate/register_user.html', {
         'form':form,
     })
