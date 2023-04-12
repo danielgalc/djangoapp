@@ -45,7 +45,7 @@ class Event(models.Model):
 # MODELO ADMIN
 
 
-class ClienteManager(BaseUserManager):
+class UsuarioManager(BaseUserManager):
     def create_user(self, email, nombre, apellido, dni, tlf, direccion, rol="CLIENTE", password=None, is_staff=False, is_superuser=False,):
         if not email:
             raise ValueError('Users must have an email address')
@@ -81,7 +81,7 @@ class ClienteManager(BaseUserManager):
 
 
 
-class Cliente(AbstractBaseUser, PermissionsMixin):
+class Usuario(AbstractBaseUser, PermissionsMixin):
     user = models.OneToOneField('self', on_delete=models.CASCADE, null=True, blank=True, default=None)
     #username = models.CharField(max_length=20, default=None)
     email = models.EmailField(
@@ -109,21 +109,8 @@ class Cliente(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     #REQUIRED_FIELDS = ['rol']
 
-    objects = ClienteManager()
+    objects = UsuarioManager()
     
-#def crear_cliente(sender, instance, created, **kwargs):
-#    if created:
-#        cliente = Cliente.objects.create_user(email=instance.email, password=instance.password)
-#        cliente.nombre = instance.nombre
-#        cliente.apellido = instance.apellido
-#        cliente.dni = instance.dni
-#        cliente.tlf = instance.tlf
-#        cliente.direccion = instance.direccion
-#        cliente.save()
-#        instance.user = cliente
-#        instance.save()
-#
-#post_save.connect(crear_cliente, sender=Cliente)
 
 
 
@@ -147,7 +134,7 @@ class Incidencia(models.Model):
     asignada = models.BooleanField(default=False)
     direccion = models.CharField(max_length=255, null=True)
     cliente_id = models.ForeignKey(
-        Cliente,
+        Usuario,
         related_name="incidencias",
         on_delete=models.CASCADE
     )

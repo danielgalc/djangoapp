@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
-from app.models import Cliente
+from app.models import Usuario
 
 # Registration form
 
@@ -45,7 +45,7 @@ class ClienteCreationForm(UserCreationForm):
 
 
     class Meta:
-        model = Cliente
+        model = Usuario
         fields = ('email', 'password1', 'password2', 'nombre', 'apellido', 'dni', 'tlf', 'direccion')
 
     def save(self, commit=True):

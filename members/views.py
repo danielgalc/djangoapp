@@ -1,17 +1,10 @@
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
-from app.models import Cliente
+from app.models import *
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import ClienteCreationForm
-
-# PARA REGISTRAR LOS CLIENTES TENEMOS QUE:
-#   1. FROM DJANGO.CONTRIB.AUTH IMPORT GET_USER_MODEL
-#   2. USER = GET_USER_MODEL()
-#   3. USUARIO = USER.OBJECTS.CREATE_USER(...)
-#   4. CLIENTE = CLIENTE.OBJECTS.CREATE(...) 
-
 
 # Create your views here.
 
@@ -57,7 +50,7 @@ def register_user(request):
             direccion = request.POST['direccion']
 
             try:
-                usuario = Cliente.objects.create_user(email=email, 
+                usuario = Usuario.objects.create_user(email=email, 
                                                       password=password,
                                                       nombre=nombre,
                                                       apellido=apellido,

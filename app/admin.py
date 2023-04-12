@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Incidencia, Venue
 from .models import MyClubUser
 from .models import Event
-from app.models import Cliente
+from app.models import *
 
 #admin.site.register(Venue)
 admin.site.register(MyClubUser)
@@ -28,8 +28,8 @@ class IncidenciaAdmin(admin.ModelAdmin):
     list_filter = ('fecha', 'direccion')
     ordering = ('-fecha',)
 
-@admin.register(Cliente)
-class ClienteAdmin(admin.ModelAdmin):
+@admin.register(Usuario)
+class UsuarioAdmin(admin.ModelAdmin):
     fields = ('email', 'nombre', 'apellido', 'rol', 'dni', 'tlf', 'direccion')
     list_display = ('email', 'rol', 'direccion')
     list_filter = ('email', 'rol', 'direccion')
