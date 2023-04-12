@@ -323,9 +323,17 @@ def add_incidencia(request):
             form = IncidenciaForm(request.POST)
             if form.is_valid():
                 #form.save()
-                event = form.save(commit=False)
-                event.cliente = request.user #Logged in user
-                event.save()
+                incidencia = form.save(commit=False)
+                incidencia.cliente_id = request.user #Logged in user
+                incidencia.save()
+
+                # Mostrar los datos que llegan por el form
+
+                print('ID de Incidencia:', incidencia.id)
+                print('Descripción:', incidencia.desc_incidencia)
+                print('Categoría:', incidencia.direccion)
+                print('Cliente ID:', incidencia.cliente_id)
+
                 return HttpResponseRedirect('/add_incidencia?submitted=True')
     else:
         # Just going to the page, not submitting

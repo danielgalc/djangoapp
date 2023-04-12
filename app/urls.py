@@ -19,5 +19,5 @@ urlpatterns = [
     path('venue_pdf', views.venue_pdf, name='venue-pdf'),
     # URLS RENTEL
     path('app/contacto', views.contacto, name='contacto'),
-    path('app/add_incidencia', views.add_incidencia, name='add-incidencia'),
-]
+    path('add_incidencia', views.add_incidencia, name='add-incidencia'),
+    ]
