@@ -112,12 +112,12 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 class Incidencia(models.Model):
     titulo_incidencia = models.CharField(max_length=255, null=True)
     desc_incidencia = models.TextField()
-    fecha = models.DateTimeField(auto_now_add=True, editable=True)
+    fecha = models.DateTimeField(null=True, editable=True)
     asignada = models.BooleanField(default=False)
     direccion = models.CharField(max_length=255, null=True)
     cliente_id = models.ForeignKey(
         Usuario,
         related_name="incidencias",
         on_delete=models.CASCADE
-    )
+   )
 

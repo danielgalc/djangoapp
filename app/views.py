@@ -11,6 +11,9 @@ import io
 from django.contrib import messages
 from django.core.mail import send_mail, BadHeaderError
 
+from datetime import datetime, timedelta
+
+
 
 # Import Pagination Stuff
 
@@ -325,14 +328,19 @@ def add_incidencia(request):
                 #form.save()
                 incidencia = form.save(commit=False)
                 incidencia.cliente_id = request.user #Logged in user
+                incidencia.fecha = datetime.now()
                 incidencia.save()
 
                 # Mostrar los datos que llegan por el form
 
                 print('ID de Incidencia:', incidencia.id)
                 print('Descripción:', incidencia.desc_incidencia)
-                print('Categoría:', incidencia.direccion)
+                print('Dirección:', incidencia.direccion)
                 print('Cliente ID:', incidencia.cliente_id)
+                print('Fecha:', incidencia.fecha)
+                print(datetime.now())
+                print(datetime.now() + timedelta(hours=2))
+                print(type(incidencia))
 
                 return HttpResponseRedirect('/add_incidencia?submitted=True')
     else:
