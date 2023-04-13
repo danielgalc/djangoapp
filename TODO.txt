@@ -48,8 +48,10 @@ en add_incidencia.html
 
 La fecha de la incidencia cambia cuando el usuario la modifica.
 
+El formato de la fecha ahora es el correcto. Si una fecha es P.M se mostrará, por ejemplo: 16:00h en lugar de 4:00 p.m
+
 La incidencia no puede ser modificada por el cliente si esta está asignada.
 
-**Filtrado/ordenado de incidencias por parametros. Buscador de incidencias por asunto.
+Filtrado/ordenado de incidencias por parametros. Buscador de incidencias por asunto.
 
 **Crear vistas para usuarios Soporte y Técnico.
