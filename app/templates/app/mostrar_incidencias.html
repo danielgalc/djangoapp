@@ -13,12 +13,34 @@
     </style>
 
     {% if user.is_authenticated %}
+
+    
+    
     <h1> Tus Incidencias </h1>
     <h6 style="margin-left: 70px">Usuario: {{ user }}</h6>
+
+    <form method="get" action="{% url 'app:filtrar-incidencias' %}">
+        <label for="filtro">Filtrar por:</label>
+        <select name="filtro" id="filtro">
+            <option value="fecha" {% if request.GET.filtro == 'fecha' %}selected{% endif %}>Fecha</option>
+            <option value="asignada" {% if request.GET.filtro == 'asignada' %}selected{% endif %}>Asignada</option>
+            <!-- Agregar más opciones para los campos que desee filtrar -->
+        </select>
+        <label for="orden">Ordenar por:</label>
+        <select name="orden" id="orden">
+            <option value="asc" {% if request.GET.orden == 'asc' %}selected{% endif %}>Ascendente</option>
+            <option value="desc" {% if request.GET.orden == 'desc' %}selected{% endif %}>Descendente</option>
+        </select>
+
+        <button type="submit">Filtrar</button>
+    </form>
+
     <br>
     <ul>
         {% for incidencia in incidencia_list %}
-            {% if user == incidencia.cliente_id  %}       
+            {% if user == incidencia.cliente_id  %}        
+            
+            
                 <div class="card">
                     <div class="card-header">
                     <strong>{{ incidencia.titulo_incidencia }}</strong>

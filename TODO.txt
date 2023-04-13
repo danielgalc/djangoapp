@@ -48,11 +48,8 @@ en add_incidencia.html
 
 La fecha de la incidencia cambia cuando el usuario la modifica.
 
-**La incidencia no puede ser modificada por el cliente si esta está asignada.
+La incidencia no puede ser modificada por el cliente si esta está asignada.
 
-**Filtrado/ordenado de incidencias por parametros. Buscador de incidencias por asunto.  
-
-**En el navbar, hacer comprobaciones para mostrar una cosa u otra según si usuario
-está logueado o no.
+**Filtrado/ordenado de incidencias por parametros. Buscador de incidencias por asunto.
 
 **Crear vistas para usuarios Soporte y Técnico.

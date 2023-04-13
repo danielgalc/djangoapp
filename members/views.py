@@ -27,6 +27,7 @@ def login_user(request):
                 'form': AuthenticationForm,
             })
         else:
+            # AÑADIR REDIRECTS HACIA SOPORTE Y ADMIN
             login(request, user)
             return redirect('app/index')
 

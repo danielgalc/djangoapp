@@ -408,6 +408,30 @@ def update_incidencia(request, incidencia_id):
     return HttpResponse(template.render(context, request))
 
 
+def filtrar_incidencias(request):
+    # Obtener el campo a filtrar del parámetro de la solicitud GET
+    filtro = request.GET.get('filtro', 'fecha')
+    
+    # Obtener el orden del parámetro de la solicitud GET
+    orden = request.GET.get('orden', 'asc')
+    
+    # Obtener todas las incidencias
+    incidencia_list = Incidencia.objects.all()
+
+    # Ordenar las incidencias según el campo elegido y el orden
+    if filtro == 'fecha':
+        incidencia_list = incidencia_list.order_by('fecha' if orden == 'asc' else '-fecha')
+    elif filtro == 'asignada':
+        incidencia_list = incidencia_list.order_by('asignada' if orden == 'asc' else '-asignada')
+    # Agregar más condiciones según los campos que desee filtrar
+
+    # Renderizar la plantilla con la lista filtrada de incidencias
+    template = loader.get_template('app/mostrar_incidencias.html')
+    context = {
+        'incidencia_list': incidencia_list,
+    }
+    return HttpResponse(template.render(context, request))
+
 
 
 

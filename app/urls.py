@@ -21,6 +21,7 @@ urlpatterns = [
     path('app/contacto', views.contacto, name='contacto'),
     path('add_incidencia', views.add_incidencia, name='add-incidencia'),
     path('incidencias', views.all_incidencias, name="mostrar-incidencias"),
+    path('filtrar_incidencias', views.filtrar_incidencias, name="filtrar-incidencias"),
     path('update_incidencia/<incidencia_id>', views.update_incidencia, name='update-incidencia'),
     path('delete_incidencia/<incidencia_id>', views.delete_incidencia, name='delete-incidencia'),
     ]
