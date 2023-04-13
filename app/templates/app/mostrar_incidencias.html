@@ -30,7 +30,7 @@
 
     <form id="buscador" method="get" action="{% url 'app:buscar-incidencias' %}">
         <label for="asunto">Buscar por asunto:</label>
-        <input type="text" name="asunto" id="asunto">
+        <input type="text" name="asunto" id="asunto" placeholder="Asunto">
         <button type="submit">Buscar</button>
     </form>
       
@@ -50,7 +50,7 @@
                         <ul>    
                             <li>ID: {{ incidencia.id }}</li>
                             <li>Description: {{ incidencia.desc_incidencia }}</li>
-                            <li>Fecha: {{ incidencia.fecha }}</li>
+                            <li>Fecha: {{ incidencia.fecha|date:'d/m/y' }} - {{ incidencia.fecha|date:'H:i' }}h</li>
                             <li>Asignada: {{ incidencia.asignada }}</li>
                             <li>Direccion: {{ incidencia.direccion }}</li>
                         </ul>
