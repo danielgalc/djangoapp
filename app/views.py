@@ -3,7 +3,7 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 
 from app.admin import IncidenciaAdmin
-from .models import Event, Venue
+from .models import Event, Incidencia, Venue
 from .forms import IncidenciaForm, VenueForm, EventForm, EventFormAdmin, ContactForm
 import csv
 from django.http import FileResponse
@@ -352,9 +352,47 @@ def add_incidencia(request):
 
     return HttpResponse(template.render(context, request))
 
+# Mostrar todas las incidencias
+def all_incidencias(request):
+    incidencia_list = Incidencia.objects.all().order_by('fecha')
+    template = loader.get_template('app/mostrar_incidencias.html')
+    context = {
+        'incidencia_list': incidencia_list
+    }
 
+    return HttpResponse(template.render(context, request))
 
+# Eliminar una incidencia
+def delete_incidencia(request, incidencia_id):
+    incidencia = Incidencia.objects.get(pk=incidencia_id)
+    if (request.user == incidencia.cliente_id):
+        incidencia.delete()
+        messages.success(request, ("Su incidencia ha sido eliminada con éxito."))
+        return redirect('mostrar-incidencias')
+    else:
+        messages.success(request, ("Algo salió mal."))
+        return redirect('mostrar-incidencias')
 
+# Actualizar una incidencia
+def update_incidencia(request, incidencia_id):
+    incidencia = Incidencia.objects.get(pk=incidencia_id)
+    
+    if (request.user == incidencia.cliente_id):
+        form = IncidenciaForm(request.POST or None, instance=incidencia)
+    else:
+        messages.error(request, ("Algo salió mal actualizando la incidencia."))
+    
+    if form.is_valid():
+        form.save()
+        return redirect('mostrar-incidencias')
+    
+    template = loader.get_template('app/update_incidencia.html')
+    context = {
+        'incidencia': incidencia,
+        'form': form,
+    }
+
+    return HttpResponse(template.render(context, request))
 
 
 

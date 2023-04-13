@@ -24,9 +24,11 @@ class EventAdmin(admin.ModelAdmin):
 @admin.register(Incidencia)
 class IncidenciaAdmin(admin.ModelAdmin):
     fields = ('titulo_incidencia', 'desc_incidencia', 'fecha', 'asignada', 'direccion', 'cliente_id')
-    list_display = ('titulo_incidencia', 'fecha', 'direccion')
+    list_display = ('titulo_incidencia', 'fecha', 'direccion', 'cliente_id')
     list_filter = ('fecha', 'direccion')
     ordering = ('-fecha',)
+
+    readonly_fields = ['fecha']
 
 @admin.register(Usuario)
 class UsuarioAdmin(admin.ModelAdmin):

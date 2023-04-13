@@ -1,0 +1,42 @@
+{% extends 'app/base.html' %}
+
+
+{% block content %}
+    <style>
+        ul li {
+            list-style-type: circle;
+        }
+        
+        h1 {
+            margin-left: 5%;
+        }
+    </style>
+
+    {% if user.is_authenticated %}
+    <h1> Tus Incidencias </h1>
+    <br>
+    <ul>
+        {% for incidencia in incidencia_list %}
+            {% if user == incidencia.cliente_id  %}       
+                <div class="card">
+                    <div class="card-header">
+                    <strong>{{ incidencia }}</strong>
+                    </div>
+                    <div class="card-body">
+                    <h5 class="card-title">Value: {{ incidencia.titulo_incidencia }}</h5>
+                    <p class="card-text">
+                        <ul>    
+                            <li>ID: {{ incidencia.id }}</li>
+                            <li>Description: {{ incidencia.desc_incidencia }}</li>
+                            <li>Fecha: {{ incidencia.fecha }}</li>
+                            <li>Asignada: {{ incidencia.asignada }}</li>
+                            <li>Direccion: {{ incidencia.direccion }}</li>
+                        </ul>
+                    </p>
+                    </div>     
+                </div>
+                <br>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}

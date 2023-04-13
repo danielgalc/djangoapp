@@ -23,3 +23,14 @@ He creado comentarios en los modelos.
 
 ** Es necesario hacer una plantilla y vista para mostrar las incidencias (tickets)
 del usuario que está logueado.
+
+__
+
+13/04
+
+**Crear una plantilla similar a "EVENT LIST" para mostrar las incidencias y 
+una vista para mostrarlas tambien.
+
+**En el navbar, hacer comprobaciones para mostrar una cosa u otra según si usuario
+está logueado o no.
+
