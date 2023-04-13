@@ -28,6 +28,13 @@
         <button class="boton-filtro" type="submit">Filtrar</button>
     </form>
 
+    <form id="buscador" method="get" action="{% url 'app:buscar-incidencias' %}">
+        <label for="asunto">Buscar por asunto:</label>
+        <input type="text" name="asunto" id="asunto">
+        <button type="submit">Buscar</button>
+    </form>
+      
+
     <br>
     <ul>
         {% for incidencia in incidencia_list %}

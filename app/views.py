@@ -432,6 +432,12 @@ def filtrar_incidencias(request):
     }
     return HttpResponse(template.render(context, request))
 
+def buscar_incidencias(request):
+    asunto = request.GET.get('asunto', '')
+    incidencia_list = Incidencia.objects.filter(titulo_incidencia__icontains=asunto)
+    context = {'incidencia_list': incidencia_list}
+    return render(request, 'app/mostrar_incidencias.html', context)
+
 
 
 
