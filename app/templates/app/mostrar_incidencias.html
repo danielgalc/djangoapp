@@ -4,7 +4,7 @@
 {% block content %}
     <style>
         ul li {
-            list-style-type: circle;
+            list-style-type: none;
         }
         
         h1 {
@@ -21,10 +21,9 @@
             {% if user == incidencia.cliente_id  %}       
                 <div class="card">
                     <div class="card-header">
-                    <strong>{{ incidencia }}</strong>
+                    <strong>{{ incidencia.titulo_incidencia }}</strong>
                     </div>
                     <div class="card-body">
-                    <h5 class="card-title">Value: {{ incidencia.titulo_incidencia }}</h5>
                     <p class="card-text">
                         <ul>    
                             <li>ID: {{ incidencia.id }}</li>
