@@ -46,7 +46,9 @@ apartado de "fecha", eliminandose el auto_add_now por null=True, y
 pasandose el valor de la fecha cuando se crea el propio objeto incidencia
 en add_incidencia.html
 
-**Hay que hacer que la fecha de la incidencia cambie cuando se modifique.
+La fecha de la incidencia cambia cuando el usuario la modifica.
+
+**La incidencia no puede ser modificada por el cliente si esta está asignada.
 
 **Filtrado/ordenado de incidencias por parametros. Buscador de incidencias por asunto.  
 

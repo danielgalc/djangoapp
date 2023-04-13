@@ -35,8 +35,13 @@
                     </p>
                     </div>     
                     <div class="card-footer">
-                        <a href={% url 'app:update-incidencia' incidencia.id %} class="btn btn-outline-secondary btn-sm"> Update Event </a>
-                        <a href={% url 'app:delete-incidencia' incidencia.id %} class="btn btn-outline-danger btn-sm"> Delete Event </a>
+                        {% if incidencia.asignada %}
+                            <a class="btn btn-secondary btn-sm" title="No se puede modificar una incidencia asignada" disabled> Modificar </a>
+                        {% else %}
+                            <a href={% url 'app:update-incidencia' incidencia.id %} class="btn btn-outline-secondary btn-sm"> Modificar </a>
+                        {% endif %}
+                        
+                        <a href={% url 'app:delete-incidencia' incidencia.id %} class="btn btn-outline-danger btn-sm"> Eliminar </a>
                     </div>
                 </div>
                 <br>
@@ -44,3 +49,5 @@
         {% endfor %}
     {% endif %}
 {% endblock %}
+
+
