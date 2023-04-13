@@ -391,7 +391,12 @@ def update_incidencia(request, incidencia_id):
         messages.error(request, ("Algo salió mal actualizando la incidencia."))
     
     if form.is_valid():
-        form.save()
+        incidencia_mod = form.save(commit=False)
+        incidencia_mod.fecha = datetime.now()
+        incidencia_mod.save()
+
+        messages.success(request, "Su incidencia ha sido modificada.")
+        
         return redirect('app:mostrar-incidencias')
     
     template = loader.get_template('app/update_incidencia.html')

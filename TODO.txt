@@ -21,16 +21,36 @@ He creado las urls para que todo se redirija correctamente.
 
 He creado comentarios en los modelos.
 
-** Es necesario hacer una plantilla y vista para mostrar las incidencias (tickets)
+Es necesario hacer una plantilla y vista para mostrar las incidencias (tickets)
 del usuario que está logueado.
 
 __
 
 13/04
 
-**Crear una plantilla similar a "EVENT LIST" para mostrar las incidencias y 
-una vista para mostrarlas tambien.
+He creado una plantilla para las incidencias propias de cada usuario. En dicha plantilla
+el usuario puede ver los datos de cada incidencia y elegir si modificarlas o borrarlas.
+
+Se han creado vistas para eliminar y modificar las incidencias. Todo funciona bien.
+
+Se ha determinado al campo fecha como "readonly" en admin.py, ya que 
+se lanzaba un error al entrar desde localhost/admin a cualquier objeto incidencia.
+
+Se han realizado cambios en el navbar, para mostrar 
+Incidencias (Crear incidencia, Ver Incidencias) en lugar de Events.
+
+Se han realizado pequeños cambios de CSS y HTML.
+
+Se han realizado pequeños cambios en el modelo de Incidencia, en el
+apartado de "fecha", eliminandose el auto_add_now por null=True, y
+pasandose el valor de la fecha cuando se crea el propio objeto incidencia
+en add_incidencia.html
+
+**Hay que hacer que la fecha de la incidencia cambie cuando se modifique.
+
+**Filtrado/ordenado de incidencias por parametros. Buscador de incidencias por asunto.  
 
 **En el navbar, hacer comprobaciones para mostrar una cosa u otra según si usuario
 está logueado o no.
 
+**Crear vistas para usuarios Soporte y Técnico.

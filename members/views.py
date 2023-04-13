@@ -21,7 +21,7 @@ def login_user(request):
                             password=password)
         print(user)
         if user is None:
-            messages.error(request, ('Email or password is incorrect'))
+            messages.error(request, ('La dirección email o la contraseña es errónea.'))
             messages.error(request, ((type(user))))
             return render(request, 'authenticate/login.html', {
                 'form': AuthenticationForm,
@@ -32,7 +32,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    messages.success(request, ("You were successfully logged out"))
+    messages.success(request, ("Has cerrado sesión con éxito."))
 
     return redirect('app/home')
 
@@ -68,7 +68,7 @@ def register_user(request):
             usuario = authenticate(email=email, password=password)
             print(usuario)
             login(request, usuario)
-            messages.success(request, ("Registration successful"))
+            messages.success(request, ("¡Tu cuenta ha sido creada exitósamente"))
             messages.success(request, (type(usuario)))
             return redirect('app/index')
     else:

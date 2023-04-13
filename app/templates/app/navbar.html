@@ -15,53 +15,34 @@
               <li><a class="dropdown-item" href="{% url 'app:add-incidencia' %}">Crear incidencia</a></li>
               <li><a class="dropdown-item" href="{% url 'app:mostrar-incidencias' %}">Tus incidencias</a></li>
             </ul>
-          {% else %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'app:list-events' %}">All Events</a></li>
           {% endif %}
           </li>
           {% if user.is_authenticated  %}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Venues
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="{% url 'app:add-venue' %}">Add Venue</a></li>
-              <li><a class="dropdown-item" href="{% url 'app:list-venues' %}">Venues</a></li>
-            </ul>
-          {% else %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'app:list-venues' %}">All Venues</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'app:contacto' %}">Contacto</a></li>
           {% endif %}
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Files
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="{% url 'app:venue-text' %}">Venue Text File</a></li>
-              <li><a class="dropdown-item" href="{% url 'app:venue-csv' %}">Venue CSV File</a></li>
-              <li><a class="dropdown-item" href="{% url 'app:venue-pdf' %}">Venue PDF File</a></li>
-            </ul>
           </li>
           {% if user.is_authenticated  %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'members:logout' %}">Logout</a>
+            <a class="nav-link" href="{% url 'members:logout' %}">Cerrar sesión</a>
           </li>
           {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'members:login' %}">Login</a>
+              <a class="nav-link" href="{% url 'members:login' %}">Iniciar sesión</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'members:register-user' %}">Register</a>
+              <a class="nav-link" href="{% url 'members:register-user' %}">Crea tu cuenta ya</a>
             </li>
           {% endif %}
 
         </ul>
+        <!--
         <form class="d-flex" method="POST" action="{% url 'app:search-venues' %}">
           {% csrf_token %}
 
           <input class="form-control me-2" type="search" placeholder="Search Venues" aria-label="Search" name="searched">
           <button class="btn btn-outline-secondary" type="submit">Search</button>
         </form>
+        -->
       </div>
     </div>
 </nav>
