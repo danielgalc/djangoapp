@@ -1,25 +1,18 @@
 {% extends 'app/base.html' %}
 
+{% load static %}
+
 
 {% block content %}
-    <style>
-        ul li {
-            list-style-type: none;
-        }
-        
-        h1 {
-            margin-left: 5%;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/mostrar_incidencias.css' %}">
 
     {% if user.is_authenticated %}
-
     
     
     <h1> Tus Incidencias </h1>
-    <h6 style="margin-left: 70px">Usuario: {{ user }}</h6>
+    <h6>Usuario: {{ user }}</h6>
 
-    <form method="get" action="{% url 'app:filtrar-incidencias' %}">
+    <form id="filtros" method="get" action="{% url 'app:filtrar-incidencias' %}">
         <label for="filtro">Filtrar por:</label>
         <select name="filtro" id="filtro">
             <option value="fecha" {% if request.GET.filtro == 'fecha' %}selected{% endif %}>Fecha</option>
@@ -32,7 +25,7 @@
             <option value="desc" {% if request.GET.orden == 'desc' %}selected{% endif %}>Descendente</option>
         </select>
 
-        <button type="submit">Filtrar</button>
+        <button class="boton-filtro" type="submit">Filtrar</button>
     </form>
 
     <br>
