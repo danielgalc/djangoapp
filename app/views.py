@@ -368,10 +368,10 @@ def delete_incidencia(request, incidencia_id):
     if (request.user == incidencia.cliente_id):
         incidencia.delete()
         messages.success(request, ("Su incidencia ha sido eliminada con éxito."))
-        return redirect('mostrar-incidencias')
+        return redirect('app:mostrar-incidencias')
     else:
         messages.success(request, ("Algo salió mal."))
-        return redirect('mostrar-incidencias')
+        return redirect('app:mostrar-incidencias')
 
 # Actualizar una incidencia
 def update_incidencia(request, incidencia_id):
@@ -384,7 +384,7 @@ def update_incidencia(request, incidencia_id):
     
     if form.is_valid():
         form.save()
-        return redirect('mostrar-incidencias')
+        return redirect('app:mostrar-incidencias')
     
     template = loader.get_template('app/update_incidencia.html')
     context = {
