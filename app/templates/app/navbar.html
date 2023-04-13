@@ -9,11 +9,11 @@
           {% if user.is_authenticated  %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Events
+              Incidencias
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="{% url 'app:add-event' %}">Add Event</a></li>
-              <li><a class="dropdown-item" href="{% url 'app:list-events' %}">Events</a></li>
+              <li><a class="dropdown-item" href="{% url 'app:add-incidencia' %}">Crear incidencia</a></li>
+              <li><a class="dropdown-item" href="{% url 'app:mostrar-incidencias' %}">Tus incidencias</a></li>
             </ul>
           {% else %}
             <li class="nav-item"><a class="nav-link" href="{% url 'app:list-events' %}">All Events</a></li>

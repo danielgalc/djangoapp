@@ -14,6 +14,7 @@
 
     {% if user.is_authenticated %}
     <h1> Tus Incidencias </h1>
+    <h6 style="margin-left: 70px">Usuario: {{ user }}</h6>
     <br>
     <ul>
         {% for incidencia in incidencia_list %}
@@ -34,6 +35,10 @@
                         </ul>
                     </p>
                     </div>     
+                    <div class="card-footer">
+                        <a href={% url 'app:update-incidencia' incidencia.id %} class="btn btn-outline-secondary btn-sm"> Update Event </a>
+                        <a href={% url 'app:delete-incidencia' incidencia.id %} class="btn btn-outline-danger btn-sm"> Delete Event </a>
+                    </div>
                 </div>
                 <br>
             {% endif %}
