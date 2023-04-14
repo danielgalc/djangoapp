@@ -58,17 +58,21 @@ __
 
 14/04
 
-Crear un botón para añadir nueva incidencia en el apartado Mostrar Incidencias.
+Se ha añadido un botón para añadir una nueva incidencia desde el apartado de Mostrar incidencias, por mera comodidad.
 
-Modificar datos del propio perfil de cliente
+Se ha creado una funcion para que el cliente pueda modificar/rellenar los datos de su propio perfil.
 
-Crear vistas para usuarios Soporte y Técnico. Login, redirecciones, cifrado de contraseña predeterminada.
+Se han creado vistas de prueba para los usuarios Soporte, Admin y Técnico, con sus correspondientes plantillas y redirecciones.
+Desde el login se comprueba el rol de cada usuario para así iniciar sesión y redireccionar a donde corresponda. 
+Esta comprobación se ha realizado con un diccionario de roles. 
+
+En el modelo de usuario también se han realizado cambios, sobreescribiendose la funcion SAVE, 
+para proveer al usuario de una contraseña por defecto que está cifrada. 
 
 **Hacer que la contraseña predeterminada de los roles ADMIN, SOPORTE y TECNICO se generen automaticamente de forma aleatoria.
 
 **Recuperar contraseña
 
-***Mostrar historial - Zona cliente
-
+**Mostrar historial - Zona cliente
 
 **Comenzar zona Admin

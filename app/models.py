@@ -1,3 +1,5 @@
+import random
+import string
 from django.db import models
 from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db.models.signals import post_save
@@ -109,11 +111,21 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
     objects = UsuarioManager()
 
+    #def save(self, *args, **kwargs):
+    #    if not self.password:
+    #        self.password = make_password('XlgHPCxL99')
+    #    super().save(*args, **kwargs)
+    
     def save(self, *args, **kwargs):
         if not self.password:
-            self.password = make_password('XlgHPCxL99')
+            password_length = 10 # Longitud de la contraseña
+            characters = string.ascii_letters + string.digits + string.punctuation
+            # Selecciona caracteres al azar de la cadena de caracteres definida
+            password = ''.join(random.choice(characters) for _ in range(password_length))
+            self.password = make_password(password)
+            print(password)
         super().save(*args, **kwargs)
-    
+
 # MODELO INCIDENCIA. [Zona Cliente]
 
 class Incidencia(models.Model):
