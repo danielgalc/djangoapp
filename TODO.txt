@@ -62,10 +62,13 @@ Crear un botón para añadir nueva incidencia en el apartado Mostrar Incidencias
 
 Modificar datos del propio perfil de cliente
 
+Crear vistas para usuarios Soporte y Técnico. Login, redirecciones, cifrado de contraseña predeterminada.
+
+**Hacer que la contraseña predeterminada de los roles ADMIN, SOPORTE y TECNICO se generen automaticamente de forma aleatoria.
+
 **Recuperar contraseña
 
 ***Mostrar historial - Zona cliente
 
-**Crear vistas para usuarios Soporte y Técnico.
 
 **Comenzar zona Admin

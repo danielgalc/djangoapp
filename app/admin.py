@@ -32,7 +32,8 @@ class IncidenciaAdmin(admin.ModelAdmin):
 
 @admin.register(Usuario)
 class UsuarioAdmin(admin.ModelAdmin):
-    fields = ('email', 'password', 'nombre', 'apellido', 'rol', 'dni', 'tlf', 'direccion')
+    #Si en fields colocamos PASSWORD estamos obligados a escribirla y no se va a cifrar.
+    fields = ('email', 'nombre', 'apellido', 'rol', 'dni', 'tlf', 'direccion')
     list_display = ('email', 'rol', 'direccion')
     list_filter = ('email', 'rol', 'direccion')
     ordering = ('email',)
