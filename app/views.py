@@ -3,8 +3,8 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 
 from app.admin import IncidenciaAdmin
-from .models import Event, Incidencia, Venue
-from .forms import IncidenciaForm, VenueForm, EventForm, EventFormAdmin, ContactForm
+from .models import Event, Incidencia, Usuario, Venue
+from .forms import IncidenciaForm, UsuarioForm, VenueForm, EventForm, EventFormAdmin, ContactForm
 import csv
 from django.http import FileResponse
 import io
@@ -288,7 +288,7 @@ def home(request):
     return HttpResponse(template.render(context, request))
 
 def index(request):
-    return render(request, 'authenticate/index.html', {})
+    return render(request, 'app/index.html', {})
 
 def contacto(request):
     if request.method == 'POST':
@@ -437,3 +437,18 @@ def buscar_incidencias(request):
     incidencia_list = Incidencia.objects.filter(titulo_incidencia__icontains=asunto)
     context = {'incidencia_list': incidencia_list}
     return render(request, 'app/mostrar_incidencias.html', context)
+
+def perfil(request):
+    usuario = request.user
+    
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST, instance=usuario)
+        if form.is_valid():
+            usuario_mod = form.save(commit=False)
+            usuario_mod.save()
+            messages.success(request, 'Tu perfil ha sido actualizado exitosamente.')
+            return redirect('app:index')
+    else:
+        form = UsuarioForm(instance=usuario)
+    
+    return render(request, 'app/perfil.html', {'form': form})

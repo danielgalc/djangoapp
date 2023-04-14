@@ -15,20 +15,29 @@
               <li><a class="dropdown-item" href="{% url 'app:add-incidencia' %}">Crear incidencia</a></li>
               <li><a class="dropdown-item" href="{% url 'app:mostrar-incidencias' %}">Tus incidencias</a></li>
             </ul>
-          {% endif %}
           </li>
+          {% endif %}
           {% if user.is_authenticated  %}
             <li class="nav-item"><a class="nav-link" href="{% url 'app:contacto' %}">Contacto</a></li>
           {% endif %}
           </li>
+
           {% if user.is_authenticated  %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'members:logout' %}">Cerrar sesión</a>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{user}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'app:perfil' %}">Perfil</a></li>
+              <li><a class="dropdown-item" href="{% url 'members:logout' %}">Cerrar sesión</a></li>
+            </ul>
           </li>
           {% else %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'members:login' %}">Iniciar sesión</a>
             </li>
+
             <li class="nav-item">
               <a class="nav-link" href="{% url 'members:register-user' %}">Crea tu cuenta ya</a>
             </li>

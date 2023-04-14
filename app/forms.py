@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Incidencia, Venue, Event
+from .models import Incidencia, Usuario, Venue, Event
 
 
 # Create a venue form
@@ -102,3 +102,8 @@ class IncidenciaForm(ModelForm):
             'desc_incidencia': forms.Textarea(attrs={'class':'form-control', 'placeholder': 'Describa el problema con detalle.'}),
             'direccion': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Dirección'}),
         }
+
+class UsuarioForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['nombre', 'apellido', 'dni', 'tlf', 'direccion']

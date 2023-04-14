@@ -3,16 +3,16 @@
 {% block content %}
     {% if user.is_authenticated %}
     <center>
-        {% if user == incidencia.cliente_id %}
-            <h1> Actualizar Incidencia: {{ incidencia.titulo_incidencia }} </h1>
+        {% if user %}
+            <h1> Tu perfil: {{ user }} </h1>
             Usuario: {{ user }}
-
             <form action="" method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <br>
-                <input type="submit" value="Actualizar incidencia"
+                <input type="submit" value="Actualizar perfil"
                 class="btn btn-outline-secondary">
+            </form>
         {% else %}
             <h2>Acceso denegado.</h2>        
         {% endif %}

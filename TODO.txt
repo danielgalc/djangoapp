@@ -54,4 +54,18 @@ La incidencia no puede ser modificada por el cliente si esta está asignada.
 
 Filtrado/ordenado de incidencias por parametros. Buscador de incidencias por asunto.
 
+__
+
+14/04
+
+Crear un botón para añadir nueva incidencia en el apartado Mostrar Incidencias.
+
+**Modificar datos del propio perfil de cliente
+
+**Recuperar contraseña
+
+***Mostrar historial - Zona cliente
+
 **Crear vistas para usuarios Soporte y Técnico.
+
+**Comenzar zona Admin

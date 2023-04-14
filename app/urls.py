@@ -25,4 +25,6 @@ urlpatterns = [
     path('buscar-incidencias/', views.buscar_incidencias, name='buscar-incidencias'),
     path('update_incidencia/<incidencia_id>', views.update_incidencia, name='update-incidencia'),
     path('delete_incidencia/<incidencia_id>', views.delete_incidencia, name='delete-incidencia'),
+    path('perfil', views.perfil, name='perfil'),
+    path('index', views.index, name='index'),
     ]
