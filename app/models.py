@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db.models.signals import post_save
 from django.conf import settings
+from django.contrib.auth.hashers import make_password
+
 
 
 
@@ -106,6 +108,11 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     #REQUIRED_FIELDS = ['rol']
 
     objects = UsuarioManager()
+
+    def save(self, *args, **kwargs):
+        if not self.password:
+            self.password = make_password('XlgHPCxL99')
+        super().save(*args, **kwargs)
     
 # MODELO INCIDENCIA. [Zona Cliente]
 

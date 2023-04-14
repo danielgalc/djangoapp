@@ -8,7 +8,38 @@ from .forms import UsuarioCreationForm
 
 # Create your views here.
 
+#def login_user(request):
+#    if request.method == 'GET':
+#        return render(request, 'authenticate/login.html', {
+#            'form': AuthenticationForm
+#        })
+#    else:
+#        email = request.POST['email']
+#        password = request.POST['password']
+#        user = authenticate(request,
+#                            email=email,
+#                            password=password)
+#        print(user)
+#        if user is None:
+#            messages.error(request, ('La dirección email o la contraseña es errónea.'))
+#            messages.error(request, ((type(user))))
+#            return render(request, 'authenticate/login.html', {
+#                'form': AuthenticationForm,
+#            })
+#        else:
+#            # AÑADIR REDIRECTS HACIA SOPORTE Y ADMIN
+#            login(request, user)
+#            return redirect('app/index')
+        
 def login_user(request):
+    # define un diccionario con los roles permitidos y sus respectivas redirecciones
+    role_redirects = {
+        'CLIENTE': 'app/index',
+        'SOPORTE': 'app:soporte',
+        'TECNICO': 'app:tecnico',
+        'ADMIN': 'app:administrador',
+    }
+
     if request.method == 'GET':
         return render(request, 'authenticate/login.html', {
             'form': AuthenticationForm
@@ -16,20 +47,26 @@ def login_user(request):
     else:
         email = request.POST['email']
         password = request.POST['password']
-        user = authenticate(request,
-                            email=email,
-                            password=password)
-        print(user)
+        user = authenticate(email=email, password=password)
         if user is None:
             messages.error(request, ('La dirección email o la contraseña es errónea.'))
-            messages.error(request, ((type(user))))
             return render(request, 'authenticate/login.html', {
                 'form': AuthenticationForm,
             })
         else:
-            # AÑADIR REDIRECTS HACIA SOPORTE Y ADMIN
-            login(request, user)
-            return redirect('app/index')
+            # verifica si el rol del usuario autenticado está en el diccionario de roles permitidos
+            if user.rol in role_redirects:
+                login(request, user)
+                # redirige al usuario a la página correspondiente según su rol
+                return redirect(role_redirects[user.rol])
+            else:
+                # si el rol no está permitido, muestra un mensaje de error
+                messages.error(request, ('El rol del usuario no está permitido.'))
+                return render(request, 'authenticate/login.html', {
+                    'form': AuthenticationForm,
+                })
+
+
 
 def logout_user(request):
     logout(request)

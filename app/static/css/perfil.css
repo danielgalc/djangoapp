@@ -52,8 +52,6 @@ label {
     border-color: 1px solid black;
 }
 
-
-
 .actualizar-perfil {
     display: inline-block;
     background-color: #4CAF50;
@@ -78,4 +76,5 @@ label {
   .actualizar-perfil:active {
     background-color: #4CAF50;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transf
+    transform: translateY(2px);
+}

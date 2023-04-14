@@ -27,4 +27,7 @@ urlpatterns = [
     path('delete_incidencia/<incidencia_id>', views.delete_incidencia, name='delete-incidencia'),
     path('perfil', views.perfil, name='perfil'),
     path('index', views.index, name='index'),
+    path('soporte', views.soporte, name='soporte'),
+    path('tecnico', views.tecnico, name='tecnico'),
+    path('administrador', views.administrador, name='administrador'),
     ]

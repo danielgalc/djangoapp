@@ -290,6 +290,15 @@ def home(request):
 def index(request):
     return render(request, 'app/index.html', {})
 
+def tecnico(request):
+    return render(request, 'app/tecnico.html', {})
+
+def soporte(request):
+    return render(request, 'app/soporte.html', {})
+
+def administrador(request):
+    return render(request, 'app/admin.html', {})
+
 def contacto(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)

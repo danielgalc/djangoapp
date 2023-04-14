@@ -60,7 +60,7 @@ __
 
 Crear un botón para añadir nueva incidencia en el apartado Mostrar Incidencias.
 
-**Modificar datos del propio perfil de cliente
+Modificar datos del propio perfil de cliente
 
 **Recuperar contraseña
 
