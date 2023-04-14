@@ -69,10 +69,13 @@ Esta comprobación se ha realizado con un diccionario de roles.
 En el modelo de usuario también se han realizado cambios, sobreescribiendose la funcion SAVE, 
 para proveer al usuario de una contraseña por defecto que está cifrada. 
 
-**Hacer que la contraseña predeterminada de los roles ADMIN, SOPORTE y TECNICO se generen automaticamente de forma aleatoria.
+La contraseña de los usuarios empleados se genera de forma automática y aleatoria (y se muestra a través de la consola de momento).
+Para esto se han realizado cambios en la funcion SAVE, de nuevo, del modelo Usuario.
+
+Hacer que la contraseña predeterminada de los roles ADMIN, SOPORTE y TECNICO se generen automaticamente de forma aleatoria.
 
 **Recuperar contraseña
 
-**Mostrar historial - Zona cliente
+**Limpiar archivos y codigo
 
 **Comenzar zona Admin

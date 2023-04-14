@@ -5,6 +5,20 @@
     <h1> Login </h1>
     <br><br>
 
+    <style>
+      #recuperar_password {
+        color: #007bff;
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.2s ease-in-out;
+      }
+      
+      #recuperar_password:hover {
+        color: #0056b3;
+      }
+         
+    </style>
+
     <form action="{% url 'members:login' %}" method="POST">
         {% csrf_token %}
             <div class="mb-3">
@@ -17,5 +31,8 @@
             </div>
         <input type="submit" value="Submit" class="btn btn-secondary">
     </form>
-
+    <br>
+    <!--
+    <a id="recuperar_password" href="#" style="margin-top: 100px">He olvidado mi contraseña</a>
+    -->
 {% endblock %}

@@ -5,6 +5,9 @@ from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import UsuarioCreationForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+
 
 # Create your views here.
 
@@ -114,7 +117,6 @@ def register_user(request):
     return render(request, 'authenticate/register_user.html', {
         'form':form,
     })
-
 
 def index(request):
     return render(request, 'app/index.html', {})
