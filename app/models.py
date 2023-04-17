@@ -10,7 +10,7 @@ from django.contrib.auth.hashers import make_password
 # MODELO PERSONALIZADO USUARIO Y SUPERUSUARIO(ADMIN)
 
 class UsuarioManager(BaseUserManager):
-    def create_user(self, email, nombre, apellido, dni, tlf, direccion, rol="CLIENTE", password=None, is_staff=False, is_superuser=False,):
+    def create_user(self, email, nombre=None, apellido=None, dni=None, tlf=None, direccion=None, rol="CLIENTE", password=None, is_staff=False, is_superuser=False,):
         if not email:
             raise ValueError('Users must have an email address')
 
@@ -54,9 +54,9 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
                     unique=True,
                 )
     password = models.CharField(max_length=20, default=None)
-    nombre = models.CharField(max_length=20)
-    apellido = models.CharField(max_length=20)
-    dni = models.CharField(max_length=9)
+    nombre = models.CharField(max_length=20, blank=True, null=True)
+    apellido = models.CharField(max_length=20, blank=True, null=True)
+    dni = models.CharField(max_length=9,blank=True, null=True)
 
     ROL_CHOICES = (("CLIENTE", "Cliente"),
                    ("SOPORTE", "Soporte"),
@@ -64,8 +64,8 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
                    ("ADMIN", "Admin"),)
     
     rol = models.CharField(max_length=7, choices=ROL_CHOICES)
-    tlf = models.CharField(max_length=9)
-    direccion = models.CharField(max_length=50)
+    tlf = models.CharField(max_length=9, blank=True, null=True)
+    direccion = models.CharField(max_length=50, blank=True, null=True)
 
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
