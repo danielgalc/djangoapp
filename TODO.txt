@@ -8,9 +8,6 @@ que se ha renombrado a Usuario para evitar confusiones.
 
 El login funciona correctamente en consecuencia del registro.
 
-**Hay que hacer comprobaciones en el login segun el rol del usuario que 
-inicia sesión, para así redireccionarle a una sección u otra.
-
 
 __
 
@@ -74,8 +71,20 @@ Para esto se han realizado cambios en la funcion SAVE, de nuevo, del modelo Usua
 
 Hacer que la contraseña predeterminada de los roles ADMIN, SOPORTE y TECNICO se generen automaticamente de forma aleatoria.
 
-**Recuperar contraseña
+Se han limpiado el proyecto de código y archivos de proyectos anteriores. Todos los archivos que ahora se encuentran
+en el proyecto pertenecen en su totalidad a este proyecto.
+__ 
 
-**Limpiar archivos y codigo
+17/04
+
+Los usuarios "superuser" no se podían inciar sesión aunque se guardasen los datos correctamente.
+Para solucionarlo, hemos hecho una comprobación IF antes de hacer el SET_PASSWORD, y en la llamada
+a la función CREATE_USER hemos pasado como argumento PASSWORD=PASSWORD.
+
+También se han hecho cambios mínimos en el modelo de Usuario.
+
+Se han fusionado los códigos de Cliente y Soporte/Tecnico. Todo funciona correctamente entre sí.
+
+**Recuperar contraseña
 
 **Comenzar zona Admin
