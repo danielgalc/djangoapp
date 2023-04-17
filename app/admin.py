@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Incidencia
-from app.models import *
+from app.models import Usuario
 
 @admin.register(Incidencia)
 class IncidenciaAdmin(admin.ModelAdmin):

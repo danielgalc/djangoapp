@@ -26,7 +26,8 @@ class UsuarioManager(BaseUserManager):
             is_superuser=is_superuser,
         )
 
-        user.set_password(password)
+        if password:
+            user.set_password(password)
         user.save(using=self._db)
 
         return user
@@ -41,7 +42,7 @@ class UsuarioManager(BaseUserManager):
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
 
-        return self.create_user(email, password, **extra_fields)
+        return self.create_user(email, password=password, **extra_fields)
 
 
 
@@ -54,9 +55,9 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
                     unique=True,
                 )
     password = models.CharField(max_length=20, default=None)
-    nombre = models.CharField(max_length=20, blank=True, null=True)
-    apellido = models.CharField(max_length=20, blank=True, null=True)
-    dni = models.CharField(max_length=9,blank=True, null=True)
+    nombre = models.CharField(max_length=20, null=True)
+    apellido = models.CharField(max_length=20, null=True)
+    dni = models.CharField(max_length=9, null=True)
 
     ROL_CHOICES = (("CLIENTE", "Cliente"),
                    ("SOPORTE", "Soporte"),
@@ -71,7 +72,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
-    #REQUIRED_FIELDS = ['rol']
+    #REQUIRED_FIELDS = ['nombre', 'apellido', 'tlf', 'dni', 'direccion']
 
     objects = UsuarioManager()
 
